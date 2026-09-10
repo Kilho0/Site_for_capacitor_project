@@ -52,6 +52,10 @@ function executeAction(btn) {
         const name = btn.getAttribute('data-name');
         const price = parseFloat(btn.getAttribute('data-price'));
         cart.push({ name, price });
+        
+        // NOVO: Atualiza o número de itens no HTML
+        document.getElementById('cart-count').innerText = cart.length; 
+        
         showToast(`✔ ${name} Adicionado!`);
     } 
     else if (action === 'next') {
@@ -66,7 +70,12 @@ function executeAction(btn) {
         switchStage('stage-selection');
     } 
     else if (action === 'finish') {
-        cart = [];
+        cart = []; // Esvazia o carrinho
+        
+        // NOVO: Zera o contador na tela após finalizar
+        document.getElementById('cart-count').innerText = cart.length; 
+        
+        showToast('Pedido finalizado!');
         switchStage('stage-selection');
     }
 }
